@@ -1,13 +1,12 @@
-# LAB - 
+# LAB - 10
 
-## Project Name
+## Book App
 
 ### Author: Jesse Van Volkinburg
 
 ### Links and Resources
-* [submission PR](http://xyz.com)
-* [travis](http://xyz.com)
-* [back-end](http://xyz.com) (when applicable)
+* [submission PR](https://github.com/401-advanced-javascript-jv/10-book-app/pull/1)
+* [travis](https://travis-ci.com/401-advanced-javascript-jv/10-book-app)
 * [front-end](http://xyz.com) (when applicable)
 
 #### Documentation

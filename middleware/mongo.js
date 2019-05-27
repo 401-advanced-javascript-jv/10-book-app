@@ -5,9 +5,16 @@ require('dotenv').config();
 const superagent = require('superagent');
 const mongoose = require('mongoose');
 
+const mongooseOptions = {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+};
+mongoose.connect(process.env.MONGODB_URI, mongooseOptions);
+
 // Mongoose models
-const Books = require('../models/books.js');
-const Bookshelves = require('../models/bookshelves.js');
+const books = require('../models/books.js');
+const bookshelves = require('../models/bookshelves.js');
 
 function Book(info) {
   const placeholderImage = 'https://i.imgur.com/J5LVEHL.jpg';
@@ -28,10 +35,23 @@ function Book(info) {
   //   : '';
 }
 
-function getBooks(req, res) {}
+function getBooks(req, res) {
+  return books
+    .get()
+    .then((results) => {
+      if (results.length === 0) {
+        res.render('pages/searches/new');
+      } else {
+        res.render('pages/index', { books: results });
+      }
+    })
+    .catch((err) => {
+      handleError(err, res);
+    });
+}
 
 function createSearch(req, res) {
-  let url = `https://www.googleapis.com/books/v1/volume?q=`;
+  let url = 'https://www.googleapis.com/books/v1/volumes?q=';
 
   if (req.body.search[1] === 'title') {
     url += `+intitle:${req.body.search[0]}`;
@@ -43,7 +63,7 @@ function createSearch(req, res) {
   superagent
     .get(url)
     .then((apiResponse) => {
-      apiResponse.body.items.map((bookResult) => {
+      return apiResponse.body.items.map((bookResult) => {
         return new Book(bookResult.volumeInfo);
       });
     })
@@ -59,13 +79,63 @@ function newSearch(req, res) {
   res.render('pages/searches/new');
 }
 
-function getBook(req, res) {}
+function getBook(req, res) {
+  getBookshelves().then((shelves) => {
+    console.log(shelves);
+  });
+  // books
+  //   .get(req.params.id)
+  //   .then((result) => {
+  //     console.log(result);
+  //     // res.render('pages/books/show', {
+  //     //   book: result[0]
+  //     //   bookshelves:
+  //     // })
+  //     return result;
+  //   })
+  //   .populate('bookshelf_id')
+  //   .catch((err) => {
+  //     handleError(err, res);
+  //   });
+}
 
-function getBookshelves() {}
+function getBookshelves() {
+  bookshelves
+    .get()
+    .then((result) => {
+      console.log(result);
+      return result;
+    })
+    .catch((err) => {
+      return err;
+    });
+}
 
-function createShelf(shelf) {}
+function createShelf(shelf) {
+  let normalizedShelf = shelf.toLowerCase();
+  return bookshelves.Schema.find({ name: normalizedShelf }).then((results) => {
+    if (results.length) {
+      return results[0].id;
+    } else {
+      return bookshelves.post({name:shelf}).then((results) => {
+        return results[0].id;
+      })
+    }
+  });
+}
 
-function createBook(req, res) {}
+function createBook(req, res) {
+  createShelf(req.body.bookshelf)
+    .then((bookshelf_id) => {
+      let {title, author, isbn, image_url, description}=req.body;
+      console.log(title,author,isbn,image_url,description,bookshelf_id);
+      books.post({title, author, isbn, image_url, description, bookshelf_id})
+        .then((results) => {console.log(results)});
+    })
+    .catch((err) => {
+      handleError(err, res);
+    });
+}
 
 function updateBook(req, res) {}
 
