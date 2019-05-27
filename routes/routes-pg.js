@@ -2,7 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
-const pg = require('./pg.js');
+
+const pg = require('../middleware/pg.js');
 
 // API Routes
 router.get('/', pg.getBooks);

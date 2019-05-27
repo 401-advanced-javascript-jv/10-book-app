@@ -23,6 +23,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "node index.js",
+    "start-pg": "nodex index.js pg",
     "lint": "eslint '**/*.js'",
     "test": "jest --verbose --coverage",
     "test-watch": "jest --watchAll --verbose --coverage",
