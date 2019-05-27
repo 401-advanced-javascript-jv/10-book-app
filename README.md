@@ -7,7 +7,7 @@
 ### Links and Resources
 * [Submission PR](https://github.com/401-advanced-javascript-jv/10-book-app/pull/1)
 * [Travis](https://travis-ci.com/401-advanced-javascript-jv/10-book-app)
-* [Front-end](https://serene-wave-63669.herokuapp.com/) ()
+* [Front-end](https://serene-wave-63669.herokuapp.com/)
 
 
 ### Setup
@@ -23,4 +23,5 @@
   * Entry point to the front-end of the app.
   
 #### UML
-Link to an image of the UML for your application and response to events
+![Layout diagram](./assets/10-UML.jpg)
+
