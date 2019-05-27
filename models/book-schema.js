@@ -5,26 +5,25 @@ require('mongoose-schema-jsonschema')(mongoose);
 
 const Schema = mongoose.Schema;
 
-const books = new Schema(
+const book = new Schema(
   {
-    _id: {type: Schema.Types.ObjectId, alias: 'id'},
     author: { type: String, required: true },
     title: { type: String, required: true },
     isbn: { type: String, required: true },
     image_url: { type: String, required: true },
     description: { type: String, required: true },
+    bookshelf_id: {type:String, required: true}
   },
   { toObject: { virtuals: true }, toJSON: { virtuals: true } }
 );
-books.virtual('bookshelf_id', {
-  ref: 'bookshelves',
+book.virtual('name', {
+  ref: 'Bookshelf',
   localField: 'bookshelf_id',
-  foreignField: 'id',
-  justOne: false,
+  foreignField: '_id',
 });
 
-books.pre('find', function() {
-  this.populate('bookshelf_id');
+book.pre('find', function() {
+  this.populate('name');
 });
 
-module.exports = mongoose.model('books', books);
+module.exports = mongoose.model('Book', book);

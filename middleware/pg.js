@@ -81,7 +81,6 @@ function getBook(request, response) {
     client
       .query(SQL, values)
       .then((result) => {
-        // console.log(shelves.rows);
         response.render('pages/books/show', {
           book: result.rows[0],
           bookshelves: shelves.rows,

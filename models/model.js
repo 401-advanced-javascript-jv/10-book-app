@@ -1,9 +1,7 @@
 'use strict';
 
-const Schema = require('./bookshelves-schema.js');
-
-class Bookshelves {
-  constructor() {
+class Model {
+  constructor(Schema) {
     this.Schema = Schema;
   }
 
@@ -26,4 +24,4 @@ class Bookshelves {
   }
 }
 
-module.exports = new Bookshelves();
+module.exports = Model;

@@ -5,9 +5,8 @@ require('mongoose-schema-jsonschema')(mongoose);
 
 const Schema = mongoose.Schema;
 
-const bookshelves = new Schema({
-  _id: { type: Schema.Types.ObjectId, alias: 'id' },
+const bookshelf = new Schema({
   name: { type: String, required: true },
 });
 
-module.exports = mongoose.model('bookshelves', bookshelves);
+module.exports = mongoose.model('Bookshelf', bookshelf);
