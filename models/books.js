@@ -1,18 +1,25 @@
 'use strict';
 
-const schema = require('./books-schema.js');
+const Schema = require('./books-schema.js');
 
 module.exports = class Books {
-  constructor(schema) {}
+  constructor() {}
 
   get(_id) {
     let queryObject = _id ? { _id } : {};
-    return schema.find(queryObject);
+    return Schema.find(queryObject);
   }
 
-  post(record) {}
+  post(record) {
+    let newRecord = new Schema(record);
+    return newRecord.save();
+  }
 
-  put(_id, record) {}
+  put(_id, record) {
+    return Schema.findByIdAndUpdate(_id, record, { new: true });
+  }
 
-  delete(_id) {}
+  delete(_id) {
+    return Schema.findByIdAndDelete(_id);
+  }
 };
