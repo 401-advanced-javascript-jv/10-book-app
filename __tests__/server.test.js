@@ -6,7 +6,7 @@ beforeAll(supergoose.startDB);
 afterAll(supergoose.stopDB);
 
 describe('Server', () => {
-  it('Passes', () => {
-
+  it('Passes', (done) => {
+    done();
   });
 });
