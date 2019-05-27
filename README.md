@@ -5,41 +5,22 @@
 ### Author: Jesse Van Volkinburg
 
 ### Links and Resources
-* [submission PR](https://github.com/401-advanced-javascript-jv/10-book-app/pull/1)
-* [travis](https://travis-ci.com/401-advanced-javascript-jv/10-book-app)
-* [front-end](http://xyz.com) (when applicable)
+* [Submission PR](https://github.com/401-advanced-javascript-jv/10-book-app/pull/1)
+* [Travis](https://travis-ci.com/401-advanced-javascript-jv/10-book-app)
+* [Front-end](https://serene-wave-63669.herokuapp.com/) ()
 
-#### Documentation
-* [api docs](http://xyz.com) (API servers)
-* [jsdoc](http://xyz.com) (Server assignments)
-* [styleguide](http://xyz.com) (React assignments)
-
-### Modules
-#### `modulename.js`
-##### Exported Values and Methods
-
-###### `foo(thing) -> string`
-Usage Notes or examples
-
-###### `bar(array) -> array`
-Usage Notes or examples
 
 ### Setup
 #### `.env` requirements
 * `PORT` - Port Number
+* `DATABASE_URL` - URL to the running postgres database
 * `MONGODB_URI` - URL to the running mongo instance/db
 
 #### Running the app
-* `npm start`
-* Endpoint: `/foo/bar/`
-  * Returns a JSON object with abc in it.
-* Endpoint: `/bing/zing/`
-  * Returns a JSON object with xyz in it.
+* `npm start` - to run MongoDB-backed version
+* `npm run start-pg` - to run PostgreSQL-backed version
+* Endpoint: `/`
+  * Entry point to the front-end of the app.
   
-#### Tests
-* How do you run tests?
-* What assertions were made?
-* What assertions need to be / should be made?
-
 #### UML
 Link to an image of the UML for your application and response to events
